@@ -1,138 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>World Cup Admin</title>
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
-
-    <style>
-
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background: #f4f4f4;
-        }
-
-        .card {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-        }
-
-        button {
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-        }
-
-        input, select {
-            padding: 8px;
-            margin: 5px;
-        }
-
-    </style>
-
+<title>Admin Test</title>
 </head>
 <body>
 
-<h1>🏆 Tournament Director Dashboard</h1>
+<h1>Admin Test</h1>
 
-<div class="card">
+<button id="brazilBeerButton">
++1 Brazil Beer Point
+</button>
 
-<h2>⚽ Enter Match Result</h2>
-
-<select>
-    <option>Brazil</option>
-    <option>England</option>
-    <option>Germany</option>
-    <option>Argentina</option>
-</select>
-
-<input type="number" placeholder="Goals">
-
-v
-
-<select>
-    <option>Brazil</option>
-    <option>England</option>
-    <option>Germany</option>
-    <option>Argentina</option>
-</select>
-
-<input type="number" placeholder="Goals">
-
-<br><br>
-
-<button>Submit Result</button>
-
-</div>
-
-<div class="card">
-
-<h2>🍺 Beer Points</h2>
-
-<p>Every full team round = +1 point</p>
-
-<button id="brazilBeerButton">+1 Brazil</button>
-<button id="englandBeerButton">+1 England</button>
-<button id="germanyBeerButton">+1 Germany</button>
-<button id="argentinaBeerButton">+1 Argentina</button>
-
-</div>
-
-<div class="card">
-
-<h2>🎥 VAR Tracker</h2>
-
-<button id="brazilVarButton">-1 Brazil VAR</button>
-<button id="englandVarButton">-1 England VAR</button>
-<button id="germanyVarButton">-1 Germany VAR</button>
-<button id="argentinaVarButton">-1 Argentina VAR</button>
-
-</div>
-
-<div class="card">
-
-<h2>⚡ Use Team Power</h2>
-
-<button>Brazil Flair Used</button>
-
-<button>England Bellingham Used</button>
-
-<button>Germany Efficiency Used</button>
-
-<button>Argentina Dark Arts Used</button>
-
-</div>
-
-<div class="card">
-
-<h2>🚨 Transfer Announcement</h2>
-
-<input
-type="text"
-placeholder="Enter transfer update"
-style="width:100%;">
-
-<br><br>
-
-<button>Publish Transfer</button>
-
-</div>
-
-<div class="card">
-
-<h2>🔗 Navigation</h2>
-
-<p><a href="index.html">Home</a></p>
-
-<p><a href="rules.html">Rules</a></p>
-
-</div>
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -158,136 +36,32 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 document
-  .getElementById("brazilBeerButton")
-  .addEventListener("click", async () => {
+.getElementById("brazilBeerButton")
+.addEventListener("click", async () => {
 
     const beerRef = ref(
-      db,
-      "teams/brazil/beerPoints"
+        db,
+        "teams/brazil/beerPoints"
     );
 
     const snapshot = await get(beerRef);
 
     let current = 0;
 
-    if (snapshot.exists()) {
-      current = snapshot.val();
+    if(snapshot.exists()) {
+        current = snapshot.val();
     }
 
     await set(
-      beerRef,
-      current + 1
+        beerRef,
+        current + 1
     );
 
-    alert(
-      "Brazil beer point added."
-    );
+    alert("Brazil beer point added");
 
 });
 
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-
-import {
-  getDatabase,
-  ref,
-  get,
-  set
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD8WbNzfd32Iuk-MIL8A5kk4jTZ5xM4Ojs",
-  authDomain: "george-bday-world-cup.firebaseapp.com",
-  databaseURL: "https://george-bday-world-cup-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "george-bday-world-cup",
-  storageBucket: "george-bday-world-cup.firebasestorage.app",
-  messagingSenderId: "466193866055",
-  appId: "1:466193866055:web:c66664b44dc90209230062"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-async function addBeerPoint(team) {
-
-  const beerRef = ref(
-    db,
-    "teams/" + team + "/beerPoints"
-  );
-
-  const snapshot = await get(beerRef);
-
-  let current = 0;
-
-  if (snapshot.exists()) {
-    current = snapshot.val();
-  }
-
-  await set(
-    beerRef,
-    current + 1
-  );
-
-}
-
-async function useVar(team) {
-
-  const varRef = ref(
-    db,
-    "varRemaining/" + team
-  );
-
-  const snapshot = await get(varRef);
-
-  let current = 0;
-
-  if (snapshot.exists()) {
-    current = snapshot.val();
-  }
-
-  if (current > 0) {
-    await set(
-      varRef,
-      current - 1
-    );
-  }
-
-}
-
-document.getElementById("brazilBeerButton")
-.addEventListener("click", () =>
-addBeerPoint("brazil"));
-
-document.getElementById("englandBeerButton")
-.addEventListener("click", () =>
-addBeerPoint("england"));
-
-document.getElementById("germanyBeerButton")
-.addEventListener("click", () =>
-addBeerPoint("germany"));
-
-document.getElementById("argentinaBeerButton")
-.addEventListener("click", () =>
-addBeerPoint("argentina"));
-
-document.getElementById("brazilVarButton")
-.addEventListener("click", () =>
-useVar("brazil"));
-
-document.getElementById("englandVarButton")
-.addEventListener("click", () =>
-useVar("england"));
-
-document.getElementById("germanyVarButton")
-.addEventListener("click", () =>
-useVar("germany"));
-
-document.getElementById("argentinaVarButton")
-.addEventListener("click", () =>
-useVar("argentina"));
-
 </script>
-``
+
 </body>
 </html>
