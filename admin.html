@@ -81,45 +81,7 @@ v
     +1 Brazil
 </button>
 ``
-async function addBeerPoint(team) {
 
-    const beerRef = ref(
-        db,
-        "teams/" + team + "/beerPoints"
-    );
-
-    const snapshot = await get(beerRef);
-
-    let current = 0;
-
-    if (snapshot.exists()) {
-        current = snapshot.val();
-    }
-
-    await set(
-        beerRef,
-        current + 1
-    );
-
-}
-
-document
-.getElementById("englandBeerButton")
-.addEventListener("click", () =>
-    addBeerPoint("england")
-);
-
-document
-.getElementById("germanyBeerButton")
-.addEventListener("click", () =>
-    addBeerPoint("germany")
-);
-
-document
-.getElementById("argentinaBeerButton")
-.addEventListener("click", () =>
-    addBeerPoint("argentina")
-);
 <button id="englandBeerButton">+1 England</button>
 <button id="germanyBeerButton">+1 Germany</button>
 <button id="argentinaBeerButton">+1 Argentina</button>
@@ -133,52 +95,7 @@ document
 <button id="brazilVarButton">
     -1 Brazil VAR
 </button>
-async function useVar(team) {
 
-    const varRef = ref(
-        db,
-        "varRemaining/" + team
-    );
-
-    const snapshot =
-        await get(varRef);
-
-    let current = 0;
-
-    if (snapshot.exists()) {
-        current = snapshot.val();
-    }
-
-    if (current > 0) {
-
-        await set(
-            varRef,
-            current - 1
-        );
-
-    }
-
-}
-    document
-.getElementById("brazilVarButton")
-.addEventListener("click", () =>
-    useVar("brazil")
-);
-    document
-.getElementById("englandVarButton")
-.addEventListener("click", () =>
-    useVar("england")
-);
-    document
-.getElementById("germanyVarButton")
-.addEventListener("click", () =>
-    useVar("germany")
-);
-    document
-.getElementById("argentinaVarButton")
-.addEventListener("click", () =>
-    useVar("argentina")
-);
 <button id="englandVarButton">
 -1 England VAR
 </button>
@@ -282,6 +199,111 @@ document
     );
 
 });
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  get,
+  set
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD8WbNzfd32Iuk-MIL8A5kk4jTZ5xM4Ojs",
+  authDomain: "george-bday-world-cup.firebaseapp.com",
+  databaseURL: "https://george-bday-world-cup-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "george-bday-world-cup",
+  storageBucket: "george-bday-world-cup.firebasestorage.app",
+  messagingSenderId: "466193866055",
+  appId: "1:466193866055:web:c66664b44dc90209230062"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+async function addBeerPoint(team) {
+
+    const beerRef = ref(
+        db,
+        "teams/" + team + "/beerPoints"
+    );
+
+    const snapshot = await get(beerRef);
+
+    let current = 0;
+
+    if (snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    await set(
+        beerRef,
+        current + 1
+    );
+
+}
+
+async function useVar(team) {
+
+    const varRef = ref(
+        db,
+        "varRemaining/" + team
+    );
+
+    const snapshot =
+        await get(varRef);
+
+    let current = 0;
+
+    if (snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    if (current > 0) {
+
+        await set(
+            varRef,
+            current - 1
+        );
+
+    }
+
+}
+
+document.getElementById("brazilBeerButton")
+.addEventListener("click", () =>
+addBeerPoint("brazil"));
+
+document.getElementById("englandBeerButton")
+.addEventListener("click", () =>
+addBeerPoint("england"));
+
+document.getElementById("germanyBeerButton")
+.addEventListener("click", () =>
+addBeerPoint("germany"));
+
+document.getElementById("argentinaBeerButton")
+.addEventListener("click", () =>
+addBeerPoint("argentina"));
+
+document.getElementById("brazilVarButton")
+.addEventListener("click", () =>
+useVar("brazil"));
+
+document.getElementById("englandVarButton")
+.addEventListener("click", () =>
+useVar("england"));
+
+document.getElementById("germanyVarButton")
+.addEventListener("click", () =>
+useVar("germany"));
+
+document.getElementById("argentinaVarButton")
+.addEventListener("click", () =>
+useVar("argentina"));
 
 </script>
 </body>
