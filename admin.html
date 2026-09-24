@@ -13,7 +13,12 @@
 <button id="englandBeerButton">
 +1 England Beer Point
 </button>
-
+<button id="argentinaBeerButton">
++1 Argentina Beer Point
+</button>
+<button id="germanyBeerButton">
++1 Germany Beer Point
+</button>
 
 <script type="module">
 
@@ -75,6 +80,54 @@ document.getElementById("englandBeerButton")
     );
 
     alert("England beer point added");
+
+});
+document.getElementById("argentinaBeerButton")
+.addEventListener("click", async () => {
+
+    const beerRef = ref(
+        db,
+        "teams/argentina/beerPoints"
+    );
+
+    const snapshot = await get(beerRef);
+
+    let current = 0;
+
+    if(snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    await set(
+        beerRef,
+        current + 1
+    );
+
+    alert("Argentina beer point added");
+
+});  
+document.getElementById("germanyBeerButton")
+.addEventListener("click", async () => {
+
+    const beerRef = ref(
+        db,
+        "teams/germany/beerPoints"
+    );
+
+    const snapshot = await get(beerRef);
+
+    let current = 0;
+
+    if(snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    await set(
+        beerRef,
+        current + 1
+    );
+
+    alert("Germany beer point added");
 
 });
 </script>
