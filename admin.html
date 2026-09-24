@@ -69,6 +69,8 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
   async function useAbility(team) {
 
+    console.log("ABILITY CLICKED:", team);
+
     await set(
         ref(db, "abilities/" + team),
         true
