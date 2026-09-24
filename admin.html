@@ -81,12 +81,48 @@ v
     +1 Brazil
 </button>
 ``
+async function addBeerPoint(team) {
 
-<button>+1 England</button>
+    const beerRef = ref(
+        db,
+        "teams/" + team + "/beerPoints"
+    );
 
-<button>+1 Germany</button>
+    const snapshot = await get(beerRef);
 
-<button>+1 Argentina</button>
+    let current = 0;
+
+    if (snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    await set(
+        beerRef,
+        current + 1
+    );
+
+}
+
+document
+.getElementById("englandBeerButton")
+.addEventListener("click", () =>
+    addBeerPoint("england")
+);
+
+document
+.getElementById("germanyBeerButton")
+.addEventListener("click", () =>
+    addBeerPoint("germany")
+);
+
+document
+.getElementById("argentinaBeerButton")
+.addEventListener("click", () =>
+    addBeerPoint("argentina")
+);
+<button id="englandBeerButton">+1 England</button>
+<button id="germanyBeerButton">+1 Germany</button>
+<button id="argentinaBeerButton">+1 Argentina</button>
 
 </div>
 
@@ -94,13 +130,66 @@ v
 
 <h2>🎥 VAR Tracker</h2>
 
-<button>-1 Brazil VAR</button>
+<button id="brazilVarButton">
+    -1 Brazil VAR
+</button>
+async function useVar(team) {
 
-<button>-1 England VAR</button>
+    const varRef = ref(
+        db,
+        "varRemaining/" + team
+    );
 
-<button>-1 Germany VAR</button>
+    const snapshot =
+        await get(varRef);
 
-<button>-1 Argentina VAR</button>
+    let current = 0;
+
+    if (snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    if (current > 0) {
+
+        await set(
+            varRef,
+            current - 1
+        );
+
+    }
+
+}
+    document
+.getElementById("brazilVarButton")
+.addEventListener("click", () =>
+    useVar("brazil")
+);
+    document
+.getElementById("englandVarButton")
+.addEventListener("click", () =>
+    useVar("england")
+);
+    document
+.getElementById("germanyVarButton")
+.addEventListener("click", () =>
+    useVar("germany")
+);
+    document
+.getElementById("argentinaVarButton")
+.addEventListener("click", () =>
+    useVar("argentina")
+);
+<button id="englandVarButton">
+-1 England VAR
+</button>
+ 
+<button id="germanyVarButton">
+-1 Germany VAR
+</button>
+ 
+<button id="argentinaVarButton">
+-1 Argentina VAR
+</button>
 
 </div>
 
