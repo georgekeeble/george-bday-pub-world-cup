@@ -124,6 +124,24 @@ useVar("germany"));
 .addEventListener("click", () =>
 useVar("argentina"));
 
+  document
+.getElementById("transferButton")
+.addEventListener("click", async () => {
+
+    const transferText =
+        document
+        .getElementById("transferInput")
+        .value;
+
+    await set(
+        ref(db, "transfers/latest"),
+        transferText
+    );
+
+    alert("Transfer published");
+
+});
+
 document.getElementById("englandBeerButton")
 .addEventListener("click", async () => {
 
@@ -197,6 +215,20 @@ document.getElementById("germanyBeerButton")
 
 });
 </script>
+  
+<hr>
 
+<h2>🚨 Transfer Announcements</h2>
+
+<input
+id="transferInput"
+type="text"
+placeholder="Enter transfer news">
+
+<button id="transferButton">
+Publish Transfer
+</button>
+
+  
 </body>
 </html>
