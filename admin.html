@@ -67,6 +67,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+  async function useAbility(team) {
+
+    await set(
+        ref(db, "abilities/" + team),
+        true
+    );
+
+    alert(team + " ability used");
+
+}
   async function useVar(team) {
 
     const varRef = ref(
@@ -136,6 +146,11 @@ useVar("germany"));
 .getElementById("argentinaVarButton")
 .addEventListener("click", () =>
 useVar("argentina"));
+
+  document
+.getElementById("brazilAbilityButton")
+.addEventListener("click", () =>
+useAbility("brazil"));
 
   document
 .getElementById("transferButton")
