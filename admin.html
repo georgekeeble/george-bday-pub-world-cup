@@ -48,6 +48,10 @@ Argentinian Faulklands Chant Used
 Vorsprung durch Technik Used
 </button>
 
+<button id="resetAbilitiesButton">
+Reset All Abilities
+</button>
+
 <script type="module">
 
 console.log("Firebase script loading...");
@@ -259,6 +263,22 @@ document.getElementById("germanyBeerButton")
     alert("Germany beer point added");
 
 });
+
+document
+.getElementById("resetAbilitiesButton")
+.addEventListener("click", async () => {
+
+    await set(ref(db, "abilities"), {
+        brazil: false,
+        england: false,
+        germany: false,
+        argentina: false
+    });
+
+    alert("Abilities reset");
+
+});
+  
 </script>
   
 <hr>
