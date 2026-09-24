@@ -28,6 +28,9 @@
 <button id="germanyBeerButton">
 +1 Germany Beer Point
 </button>
+<button id="germanyVarButton">
+-1 Germany VAR
+</button>
 
 <script type="module">
 
@@ -107,6 +110,11 @@ useVar("brazil"));
 .getElementById("englandVarButton")
 .addEventListener("click", () =>
 useVar("england"));
+  
+  document
+.getElementById("germanyVarButton")
+.addEventListener("click", () =>
+useVar("germany"));
 
 document.getElementById("englandBeerButton")
 .addEventListener("click", async () => {
