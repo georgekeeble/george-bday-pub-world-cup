@@ -13,14 +13,10 @@
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+console.log("Firebase script loading...");
 
-import {
-  getDatabase,
-  ref,
-  get,
-  set
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD8WbNzfd32Iuk-MIL8A5kk4jTZ5xM4Ojs",
@@ -35,14 +31,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-document
-.getElementById("brazilBeerButton")
+document.getElementById("brazilBeerButton")
 .addEventListener("click", async () => {
 
-    const beerRef = ref(
-        db,
-        "teams/brazil/beerPoints"
-    );
+    const beerRef = ref(db, "teams/brazil/beerPoints");
 
     const snapshot = await get(beerRef);
 
@@ -52,10 +44,7 @@ document
         current = snapshot.val();
     }
 
-    await set(
-        beerRef,
-        current + 1
-    );
+    await set(beerRef, current + 1);
 
     alert("Brazil beer point added");
 
