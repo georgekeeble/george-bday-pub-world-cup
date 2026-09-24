@@ -187,3 +187,88 @@
     </p>
 
 </div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD8WbNzfd32Iuk-MIL8A5kk4jTZ5xM4Ojs",
+  authDomain: "george-bday-world-cup.firebaseapp.com",
+  databaseURL: "https://george-bday-world-cup-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "george-bday-world-cup",
+  storageBucket: "george-bday-world-cup.firebasestorage.app",
+  messagingSenderId: "466193866055",
+  appId: "1:466193866055:web:c66664b44dc90209230062"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+onValue(ref(db, "teams"), (snapshot) => {
+
+    const teams = snapshot.val();
+
+    if (!teams) return;
+
+    ["brazil","england","germany","argentina"].forEach(team => {
+
+        document.getElementById(
+            team + "MatchPoints"
+        ).innerText =
+            teams[team].matchPoints;
+
+        document.getElementById(
+            team + "BeerPoints"
+        ).innerText =
+            teams[team].beerPoints;
+
+        document.getElementById(
+            team + "TotalPoints"
+        ).innerText =
+            teams[team].matchPoints +
+            teams[team].beerPoints;
+
+    });
+
+});
+
+onValue(ref(db, "varRemaining"), (snapshot) => {
+
+    const vars = snapshot.val();
+
+    if (!vars) return;
+
+    document.getElementById("brazilVar").innerText =
+        vars.brazil;
+
+    document.getElementById("englandVar").innerText =
+        vars.england;
+
+    document.getElementById("germanyVar").innerText =
+        vars.germany;
+
+    document.getElementById("argentinaVar").innerText =
+        vars.argentina;
+
+});
+
+onValue(ref(db, "transfers/latest"), (snapshot) => {
+
+    if (!snapshot.exists()) return;
+
+    document.getElementById(
+        "latestTransfer"
+    ).innerText =
+        snapshot.val();
+
+});
+
+</script>
+</body>
