@@ -10,6 +10,9 @@
 <button id="brazilBeerButton">
 +1 Brazil Beer Point
 </button>
+<button id="brazilVarButton">
+-1 Brazil VAR
+</button>
 <button id="englandBeerButton">
 +1 England Beer Point
 </button>
@@ -39,6 +42,36 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+  async function useVar(team) {
+
+    const varRef = ref(
+        db,
+        "varRemaining/" + team
+    );
+
+    const snapshot =
+        await get(varRef);
+
+    let current = 0;
+
+    if (snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    if (current > 0) {
+
+        await set(
+            varRef,
+            current - 1
+        );
+
+        alert(
+            team + " VAR used"
+        );
+
+    }
+
+}
 
 document.getElementById("brazilBeerButton")
 .addEventListener("click", async () => {
@@ -58,6 +91,11 @@ document.getElementById("brazilBeerButton")
     alert("Brazil beer point added");
 
 });
+  document
+.getElementById("brazilVarButton")
+.addEventListener("click", () =>
+useVar("brazil"));
+
 document.getElementById("englandBeerButton")
 .addEventListener("click", async () => {
 
