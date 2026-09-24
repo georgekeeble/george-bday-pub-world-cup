@@ -316,33 +316,21 @@ onValue(ref(db, "abilities"), (snapshot) => {
 
     if (!abilities) return;
 
-    document.getElementById(
-        "brazilAbilityStatus"
-    ).innerText =
-        abilities.brazil
-        ? "❌ Used"
-        : "✅ Available";
+    document.getElementById("brazilAbilityStatus")
+        .innerText =
+        abilities.brazil ? "❌ Used" : "✅ Available";
 
-    document.getElementById(
-        "englandAbilityStatus"
-    ).innerText =
-        abilities.england
-        ? "❌ Used"
-        : "✅ Available";
+    document.getElementById("englandAbilityStatus")
+        .innerText =
+        abilities.england ? "❌ Used" : "✅ Available";
 
-    document.getElementById(
-        "germanyAbilityStatus"
-    ).innerText =
-        abilities.germany
-        ? "❌ Used"
-        : "✅ Available";
+    document.getElementById("germanyAbilityStatus")
+        .innerText =
+        abilities.germany ? "❌ Used" : "✅ Available";
 
-    document.getElementById(
-        "argentinaAbilityStatus"
-    ).innerText =
-        abilities.argentina
-        ? "❌ Used"
-        : "✅ Available";
+    document.getElementById("argentinaAbilityStatus")
+        .innerText =
+        abilities.argentina ? "❌ Used" : "✅ Available";
 
 });
     
