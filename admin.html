@@ -10,6 +10,10 @@
 <button id="brazilBeerButton">
 +1 Brazil Beer Point
 </button>
+<button id="englandBeerButton">
++1 England Beer Point
+</button>
+
 
 <script type="module">
 
@@ -49,7 +53,30 @@ document.getElementById("brazilBeerButton")
     alert("Brazil beer point added");
 
 });
+document.getElementById("englandBeerButton")
+.addEventListener("click", async () => {
 
+    const beerRef = ref(
+        db,
+        "teams/england/beerPoints"
+    );
+
+    const snapshot = await get(beerRef);
+
+    let current = 0;
+
+    if(snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    await set(
+        beerRef,
+        current + 1
+    );
+
+    alert("England beer point added");
+
+});
 </script>
 
 </body>
