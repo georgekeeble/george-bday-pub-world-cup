@@ -188,6 +188,46 @@
 
 </div>
 
+<div class="card">
+
+    <h2>⚡ Team Traits</h2>
+
+    <table>
+
+        <tr>
+            <th>Team</th>
+            <th>Ability</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>🇧🇷 Brazil</td>
+            <td>Brazilian Flair</td>
+            <td id="brazilAbilityStatus">✅ Available</td>
+        </tr>
+
+        <tr>
+            <td>🏴 England</td>
+            <td>Bellingham Ab Blast</td>
+            <td id="englandAbilityStatus">✅ Available</td>
+        </tr>
+
+        <tr>
+            <td>🇩🇪 Germany</td>
+            <td>Vorsprung durch Technik</td>
+            <td id="germanyAbilityStatus">✅ Available</td>
+        </tr>
+
+        <tr>
+            <td>🇦🇷 Argentina</td>
+            <td>Argentinian Falklands Chant</td>
+            <td id="argentinaAbilityStatus">✅ Available</td>
+        </tr>
+
+    </table>
+
+</div>
+    
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -270,5 +310,41 @@ onValue(ref(db, "transfers/latest"), (snapshot) => {
 
 });
 
+onValue(ref(db, "abilities"), (snapshot) => {
+
+    const abilities = snapshot.val();
+
+    if (!abilities) return;
+
+    document.getElementById(
+        "brazilAbilityStatus"
+    ).innerText =
+        abilities.brazil
+        ? "❌ Used"
+        : "✅ Available";
+
+    document.getElementById(
+        "englandAbilityStatus"
+    ).innerText =
+        abilities.england
+        ? "❌ Used"
+        : "✅ Available";
+
+    document.getElementById(
+        "germanyAbilityStatus"
+    ).innerText =
+        abilities.germany
+        ? "❌ Used"
+        : "✅ Available";
+
+    document.getElementById(
+        "argentinaAbilityStatus"
+    ).innerText =
+        abilities.argentina
+        ? "❌ Used"
+        : "✅ Available";
+
+});
+    
 </script>
 </body>
