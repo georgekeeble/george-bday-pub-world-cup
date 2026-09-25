@@ -341,6 +341,17 @@ onValue(ref(db, "abilities"), (snapshot) => {
         abilities.argentina ? "❌ Used" : "✅ Available";
 
 });
+
+onValue(ref(db, "results/latest"), (snapshot) => {
+
+    if (!snapshot.exists()) return;
+
+    document.getElementById(
+        "latestResult"
+    ).innerText =
+        snapshot.val();
+
+});
     
 </script>
 </body>
