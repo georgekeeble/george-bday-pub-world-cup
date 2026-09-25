@@ -434,6 +434,18 @@ async function submitResult() {
         `${homeTeam} ${homeGoals}-${awayGoals} ${awayTeam}`
     );
 
+  const historyRef = ref(
+    db,
+    "matchHistory/" + Date.now()
+);
+
+await set(historyRef, {
+    homeTeam: homeTeam,
+    awayTeam: awayTeam,
+    homeGoals: homeGoals,
+    awayGoals: awayGoals
+});
+  
     alert("Result submitted");
 
 }
