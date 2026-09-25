@@ -222,11 +222,27 @@ document
         .getElementById("transferInput")
         .value;
 
-    // Latest transfer
     await set(
         ref(db, "transfers/latest"),
         transferText
     );
+
+    const transferId =
+        Date.now().toString() +
+        "-" +
+        Math.floor(Math.random() * 100000);
+
+    await set(
+        ref(
+            db,
+            "transferHistory/" + transferId
+        ),
+        transferText
+    );
+
+    alert("Transfer published");
+
+});
 
   
 
