@@ -345,6 +345,24 @@ document
         "Transfer window not yet opened."
     );
 
+  // Reset transfer feed
+await set(
+    ref(db, "transfers/latest"),
+    "Transfer window not yet opened."
+);
+
+  // Reset latest match result
+await set(
+    ref(db, "results/latest"),
+    "No matches played yet."
+);
+
+// Clear match history
+await set(
+    ref(db, "matchHistory"),
+    null
+);
+
     // Reset points
     await set(ref(db, "teams"), {
         brazil: {
