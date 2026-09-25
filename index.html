@@ -111,33 +111,9 @@
     <th>Total</th>
 </tr>
 
-<tr>
-    <td>🇧🇷 Brazil</td>
-    <td id="brazilMatchPoints">0</td>
-    <td id="brazilBeerPoints">0</td>
-    <td id="brazilTotalPoints">0</td>
-</tr>
+<tbody id="leagueTableBody">
 
-<tr>
-    <td>🏴 England</td>
-    <td id="englandMatchPoints">0</td>
-    <td id="englandBeerPoints">0</td>
-    <td id="englandTotalPoints">0</td>
-</tr>
-
-<tr>
-    <td>🇩🇪 Germany</td>
-    <td id="germanyMatchPoints">0</td>
-    <td id="germanyBeerPoints">0</td>
-    <td id="germanyTotalPoints">0</td>
-</tr>
-
-<tr>
-    <td>🇦🇷 Argentina</td>
-    <td id="argentinaMatchPoints">0</td>
-    <td id="argentinaBeerPoints">0</td>
-    <td id="argentinaTotalPoints">0</td>
-</tr>
+</tbody>
             
     </table>
 
@@ -275,25 +251,43 @@ onValue(ref(db, "teams"), (snapshot) => {
 
     if (!teams) return;
 
-    ["brazil","england","germany","argentina"].forEach(team => {
+    const sortedTeams =
+        Object.entries(teams)
+        .map(([name, data]) => ({
+            name,
+            matchPoints: data.matchPoints || 0,
+            beerPoints: data.beerPoints || 0,
+            total:
+                (data.matchPoints || 0) +
+                (data.beerPoints || 0)
+        }))
+        .sort((a, b) => b.total - a.total);
 
-        document.getElementById(
-            team + "MatchPoints"
-        ).innerText =
-            teams[team].matchPoints;
+    const flags = {
+        brazil: "🇧🇷",
+        england: "🏴",
+        germany: "🇩🇪",
+        argentina: "🇦🇷"
+    };
 
-        document.getElementById(
-            team + "BeerPoints"
-        ).innerText =
-            teams[team].beerPoints;
+    let html = "";
 
-        document.getElementById(
-            team + "TotalPoints"
-        ).innerText =
-            teams[team].matchPoints +
-            teams[team].beerPoints;
+    sortedTeams.forEach(team => {
+
+        html += `
+            <tr>
+                <td>${flags[team.name]} ${team.name}</td>
+                <td>${team.matchPoints}</td>
+                <td>${team.beerPoints}</td>
+                <td>${team.total}</td>
+            </tr>
+        `;
 
     });
+
+    document.getElementById(
+        "leagueTableBody"
+    ).innerHTML = html;
 
 });
 
