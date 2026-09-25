@@ -213,7 +213,7 @@ document
 
 });
 
- document
+document
 .getElementById("transferButton")
 .addEventListener("click", async () => {
 
@@ -226,6 +226,22 @@ document
         ref(db, "transfers/latest"),
         transferText
     );
+
+    // ADD THIS SECTION
+    const transferId =
+        Date.now().toString();
+
+    await set(
+        ref(
+            db,
+            "transferHistory/" + transferId
+        ),
+        transferText
+    );
+
+    alert("Transfer published");
+
+});
 
 const transferId =
     Date.now() +
