@@ -434,6 +434,8 @@ async function submitResult() {
         `${homeTeam} ${homeGoals}-${awayGoals} ${awayTeam}`
     );
 
+  alert("Writing match history");
+
   const historyRef = ref(
     db,
     "matchHistory/" + Date.now()
