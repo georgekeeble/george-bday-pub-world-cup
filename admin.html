@@ -213,7 +213,7 @@ document
 
 });
 
-  document
+ document
 .getElementById("transferButton")
 .addEventListener("click", async () => {
 
@@ -227,10 +227,20 @@ document
         transferText
     );
 
-  await set(
-    ref(db, "transferHistory"),
-    null
+const transferId =
+    Date.now() +
+    "-" +
+    Math.floor(Math.random() * 100000);
+
+await set(
+    ref(db, "transferHistory/" + transferId),
+    transferText
 );
+``
+
+    alert("Transfer published");
+
+});
 
     await set(
         ref(db, "transferHistory/" + Date.now()),
