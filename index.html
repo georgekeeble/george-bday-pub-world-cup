@@ -367,7 +367,16 @@ onValue(ref(db, "matchHistory"), (snapshot) => {
 
     const history = snapshot.val();
 
-    if (!history) return;
+    if (!history) {
+
+        document.getElementById(
+            "matchHistory"
+        ).innerHTML =
+            "No matches played yet.";
+
+        return;
+
+    }
 
     let html = "";
 
@@ -386,6 +395,12 @@ onValue(ref(db, "matchHistory"), (snapshot) => {
             `;
 
         });
+
+    document.getElementById(
+        "matchHistory"
+    ).innerHTML = html;
+
+});
 
     document.getElementById(
         "matchHistory"
