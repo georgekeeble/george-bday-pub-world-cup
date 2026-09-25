@@ -227,6 +227,11 @@ document
         transferText
     );
 
+  await set(
+    ref(db, "transferHistory"),
+    null
+);
+
     await set(
         ref(db, "transferHistory/" + Date.now()),
         transferText
