@@ -362,6 +362,36 @@ onValue(ref(db, "results/latest"), (snapshot) => {
         snapshot.val();
 
 });
+
+onValue(ref(db, "matchHistory"), (snapshot) => {
+
+    const history = snapshot.val();
+
+    if (!history) return;
+
+    let html = "";
+
+    Object.values(history)
+        .reverse()
+        .forEach(match => {
+
+            html += `
+                <p>
+                    ${match.homeTeam}
+                    ${match.homeGoals}
+                    -
+                    ${match.awayGoals}
+                    ${match.awayTeam}
+                </p>
+            `;
+
+        });
+
+    document.getElementById(
+        "matchHistory"
+    ).innerHTML = html;
+
+});
     
 </script>
 </body>
