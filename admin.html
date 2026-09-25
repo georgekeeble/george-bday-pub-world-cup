@@ -52,6 +52,10 @@ Vorsprung durch Technik Used
 Reset All Abilities
 </button>
 
+<button id="resetTournamentButton">
+🔄 Reset Tournament
+</button>
+
 <script type="module">
 
 console.log("Firebase script loading...");
@@ -276,6 +280,56 @@ document
     });
 
     alert("Abilities reset");
+
+});
+
+document
+.getElementById("resetTournamentButton")
+.addEventListener("click", async () => {
+
+    // Reset abilities
+    await set(ref(db, "abilities"), {
+        brazil: false,
+        england: false,
+        germany: false,
+        argentina: false
+    });
+
+    // Reset VAR
+    await set(ref(db, "varRemaining"), {
+        brazil: 2,
+        england: 2,
+        germany: 2,
+        argentina: 2
+    });
+
+    // Reset transfer feed
+    await set(
+        ref(db, "transfers/latest"),
+        "Transfer window not yet opened."
+    );
+
+    // Reset points
+    await set(ref(db, "teams"), {
+        brazil: {
+            beerPoints: 0,
+            matchPoints: 0
+        },
+        england: {
+            beerPoints: 0,
+            matchPoints: 0
+        },
+        germany: {
+            beerPoints: 0,
+            matchPoints: 0
+        },
+        argentina: {
+            beerPoints: 0,
+            matchPoints: 0
+        }
+    });
+
+    alert("Tournament reset!");
 
 });
   
