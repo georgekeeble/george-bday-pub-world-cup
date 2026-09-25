@@ -209,10 +209,6 @@ document
 .getElementById("submitResultButton")
 .addEventListener("click", () => {
 
-    alert("Button works");
-
-    alert("Calling submitResult");
-
     submitResult();
 
 });
@@ -374,7 +370,6 @@ document
 });
 
 async function submitResult() {
-  alert("NEW VERSION RUNNING");
 
     const homeTeam =
         document.getElementById("homeTeam").value;
@@ -443,7 +438,6 @@ async function submitResult() {
         `${homeTeam} ${homeGoals}-${awayGoals} ${awayTeam}`
     );
 
-  alert("Writing match history");
 
   const historyRef = ref(
     db,
