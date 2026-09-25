@@ -405,6 +405,39 @@ onValue(ref(db, "matchHistory"), (snapshot) => {
     ).innerHTML = html;
 
 });
+
+onValue(ref(db, "transferHistory"), (snapshot) => {
+
+    const history = snapshot.val();
+
+    if (!history) {
+
+        document.getElementById(
+            "transferHistory"
+        ).innerHTML =
+            "No transfers yet.";
+
+        return;
+
+    }
+
+    let html = "";
+
+    Object.values(history)
+        .reverse()
+        .forEach(transfer => {
+
+            html += `
+                <p>🚨 ${transfer}</p>
+            `;
+
+        });
+
+    document.getElementById(
+        "transferHistory"
+    ).innerHTML = html;
+
+});
     
 </script>
 </body>
