@@ -222,14 +222,17 @@ document
         .getElementById("transferInput")
         .value;
 
+    // Latest transfer
     await set(
         ref(db, "transfers/latest"),
         transferText
     );
 
-    // ADD THIS SECTION
+    // Transfer history
     const transferId =
-        Date.now().toString();
+        Date.now().toString() +
+        "-" +
+        Math.floor(Math.random() * 100000);
 
     await set(
         ref(
@@ -242,7 +245,6 @@ document
     alert("Transfer published");
 
 });
-
 const transferId =
     Date.now() +
     "-" +
@@ -381,10 +383,9 @@ document
         "Transfer window not yet opened."
     );
 
-  // Reset transfer feed
 await set(
-    ref(db, "transfers/latest"),
-    "Transfer window not yet opened."
+    ref(db, "transferHistory"),
+    null
 );
 
   // Reset latest match result
