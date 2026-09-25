@@ -205,6 +205,10 @@ document
 .addEventListener("click", () =>
 useAbility("argentina"));
 
+ document
+.getElementById("submitResultButton")
+.addEventListener("click", submitResult); 
+
   document
 .getElementById("transferButton")
 .addEventListener("click", async () => {
@@ -360,6 +364,79 @@ document
     alert("Tournament reset!");
 
 });
+
+async function submitResult() {
+
+    const homeTeam =
+        document.getElementById("homeTeam").value;
+
+    const awayTeam =
+        document.getElementById("awayTeam").value;
+
+    const homeGoals =
+        parseInt(document.getElementById("homeGoals").value);
+
+    const awayGoals =
+        parseInt(document.getElementById("awayGoals").value);
+
+    if(homeTeam === awayTeam) {
+        alert("Choose different teams");
+        return;
+    }
+
+    const homeRef =
+        ref(db, "teams/" + homeTeam + "/matchPoints");
+
+    const awayRef =
+        ref(db, "teams/" + awayTeam + "/matchPoints");
+
+    const homeSnap = await get(homeRef);
+    const awaySnap = await get(awayRef);
+
+    let homePoints =
+        homeSnap.exists() ? homeSnap.val() : 0;
+
+    let awayPoints =
+        awaySnap.exists() ? awaySnap.val() : 0;
+
+    if(homeGoals > awayGoals) {
+
+        await set(
+            homeRef,
+            homePoints + 3
+        );
+
+    }
+    else if(awayGoals > homeGoals) {
+
+        await set(
+            awayRef,
+            awayPoints + 3
+        );
+
+    }
+    else {
+
+        await set(
+            homeRef,
+            homePoints + 1
+        );
+
+        await set(
+            awayRef,
+            awayPoints + 1
+        );
+
+    }
+
+    await set(
+        ref(db, "results/latest"),
+        `${homeTeam} ${homeGoals}-${awayGoals} ${awayTeam}`
+    );
+
+    alert("Result submitted");
+
+}
   
 </script>
   
