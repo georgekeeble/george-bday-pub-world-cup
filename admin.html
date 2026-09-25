@@ -205,9 +205,15 @@ document
 .addEventListener("click", () =>
 useAbility("argentina"));
 
- document
+document
 .getElementById("submitResultButton")
-.addEventListener("click", submitResult); 
+.addEventListener("click", () => {
+
+    alert("Button works");
+
+    submitResult();
+
+});
 
   document
 .getElementById("transferButton")
