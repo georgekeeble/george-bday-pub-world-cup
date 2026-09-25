@@ -227,6 +227,11 @@ document
         transferText
     );
 
+    await set(
+        ref(db, "transferHistory/" + Date.now()),
+        transferText
+    );
+
     alert("Transfer published");
 
 });
