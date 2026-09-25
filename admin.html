@@ -228,46 +228,7 @@ document
         transferText
     );
 
-    // Transfer history
-    const transferId =
-        Date.now().toString() +
-        "-" +
-        Math.floor(Math.random() * 100000);
-
-    await set(
-        ref(
-            db,
-            "transferHistory/" + transferId
-        ),
-        transferText
-    );
-
-    alert("Transfer published");
-
-});
-const transferId =
-    Date.now() +
-    "-" +
-    Math.floor(Math.random() * 100000);
-
-await set(
-    ref(db, "transferHistory/" + transferId),
-    transferText
-);
-``
-
-    alert("Transfer published");
-
-});
-
-    await set(
-        ref(db, "transferHistory/" + Date.now()),
-        transferText
-    );
-
-    alert("Transfer published");
-
-});
+  
 
 document.getElementById("englandBeerButton")
 .addEventListener("click", async () => {
