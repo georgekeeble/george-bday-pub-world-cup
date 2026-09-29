@@ -33,12 +33,23 @@ if (password !== "Adminpassword") {
 <button id="brazilBeerButton">
 +1 Brazil Beer Point
 </button>
+<button
+id="brazilBeerMinusButton"
+style="background:#ef4444;color:white;">
+-1 Brazil Beer Point
+</button>
+    
 <button id="brazilVarButton">
 -1 Brazil VAR
 </button>
   
 <button id="englandBeerButton">
 +1 England Beer Point
+</button>
+<button
+id="englandBeerMinusButton"
+style="background:#ef4444;color:white;">
+-1 England Beer Point
 </button>
 <button id="englandVarButton">
 -1 England VAR
@@ -47,12 +58,22 @@ if (password !== "Adminpassword") {
 <button id="argentinaBeerButton">
 +1 Argentina Beer Point
 </button>
+<button
+id="argentinaBeerMinusButton"
+style="background:#ef4444;color:white;">
+-1 Argentina Beer Point
+</button>
 <button id="argentinaVarButton">
 -1 Argentina VAR
 </button>
   
 <button id="germanyBeerButton">
 +1 Germany Beer Point
+</button>
+<button
+id="germanyBeerMinusButton"
+style="background:#ef4444;color:white;">
+-1 Germany Beer Point
 </button>
 <button id="germanyVarButton">
 -1 Germany VAR
@@ -138,6 +159,33 @@ true
 alert(team + " ability used");
  
 }
+
+async function removeBeerPoint(team) {
+
+    const beerRef = ref(
+        db,
+        "teams/" + team + "/beerPoints"
+    );
+
+    const snapshot = await get(beerRef);
+
+    let current = 0;
+
+    if (snapshot.exists()) {
+        current = snapshot.val();
+    }
+
+    if (current > 0) {
+
+        await set(
+            beerRef,
+            current - 1
+        );
+
+    }
+
+}
+    
   async function useVar(team) {
 
     const varRef = ref(
@@ -227,6 +275,26 @@ document
 .getElementById("argentinaAbilityButton")
 .addEventListener("click", () =>
 useAbility("argentina"));
+
+document
+.getElementById("brazilBeerMinusButton")
+.addEventListener("click", () =>
+removeBeerPoint("brazil"));
+
+document
+.getElementById("englandBeerMinusButton")
+.addEventListener("click", () =>
+removeBeerPoint("england"));
+
+document
+.getElementById("germanyBeerMinusButton")
+.addEventListener("click", () =>
+removeBeerPoint("germany"));
+
+document
+.getElementById("argentinaBeerMinusButton")
+.addEventListener("click", () =>
+removeBeerPoint("argentina"));
 
 document
 .getElementById("submitResultButton")
