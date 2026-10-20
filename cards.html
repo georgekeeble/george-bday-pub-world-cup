@@ -3,45 +3,59 @@
 
 <head>
 
-<title>🟨🟥 So you've just been carded...</title>
+    <title>🟨🟥 Card Generator</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
+    <style>
 
-body {
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
-.card {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-    margin: auto;
-    max-width: 600px;
-}
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            margin: auto;
+            max-width: 600px;
+        }
 
-button {
-    padding: 12px 20px;
-    font-size: 18px;
-    cursor: pointer;
-}
+        #result {
+            font-size: 26px;
+            font-weight: bold;
+            color: #facc15;
+            margin: 30px 0;
+            min-height: 70px;
+        }
 
-#randomName {
-    font-size: 30px;
-    margin: 30px;
-    color: #facc15;
-}
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-a {
-    color: #60a5fa;
-}
+        button:hover {
+            background: #1d4ed8;
+        }
 
-</style>
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+    </style>
 
 </head>
 
@@ -49,29 +63,30 @@ a {
 
 <div class="card">
 
-<h1>🟨🟥 So you've just been carded...</h1>
+    <h1>🟨🟥 So you've just been carded...</h1>
 
-<div id="randomName">
-Click Below.
-<br>
-Once for a 🟨, twice for a 🟥.
+    <p>
+        Press the button to receive a random outcome.
+    </p>
+
+    <div id="result">
+        Good luck...
+    </div>
+
+    <button id="generateButton">
+        🎲 Generate Outcome
+    </button>
+
+    <br>
+
+    <a href="index.html" class="back">
+        ⬅ Back to Tournament
+    </a>
+
 </div>
-
-<button id="generateButton">
-Good Luck
-</button>
-
-<br><br>
-
-<a href="index.html">
-⬅ Back to Tournament
-</a>
-
-</div>
-
 <script>
-
-const names = [
+    
+const outcomes = [
 
     "COVID hits! Any form of celebration in the next event voids your winning points only.",
     "Maradonna! Finish a beverage during your next event, no finish = no points.",
@@ -92,16 +107,21 @@ const names = [
 
 ];
 
-const generateButton = document.getElementById("generateButton");
-const resultBox = document.getElementById("randomName");
+const button =
+    document.getElementById("generateButton");
 
-generateButton.addEventListener("click", function () {
+const result =
+    document.getElementById("result");
 
-    const randomIndex = Math.floor(
-        Math.random() * names.length
-    );
+button.addEventListener("click", function () {
 
-    resultBox.innerText = names[randomIndex];
+    const randomNumber =
+        Math.floor(
+            Math.random() * outcomes.length
+        );
+
+    result.textContent =
+        outcomes[randomNumber];
 
 });
 
