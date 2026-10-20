@@ -92,24 +92,18 @@ const names = [
 
 ];
 
-function generateName() {
+const generateButton = document.getElementById("generateButton");
+const resultBox = document.getElementById("randomName");
 
-    alert("BUTTON WORKS");
+generateButton.addEventListener("click", function () {
 
-    const randomIndex =
-        Math.floor(Math.random() * names.length);
+    const randomIndex = Math.floor(
+        Math.random() * names.length
+    );
 
-    const selectedCard =
-        names[randomIndex];
+    resultBox.innerText = names[randomIndex];
 
-    document.getElementById("randomName").innerText =
-        selectedCard;
-
-}
-
-document
-    .getElementById("generateButton")
-    .addEventListener("click", generateName);
+});
 
 </script>
 
