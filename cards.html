@@ -57,7 +57,7 @@ Click Below.
 Once for a 🟨, twice for a 🟥.
 </div>
 
-<button onclick="generateName()">
+<button id="generateButton">
 Good Luck
 </button>
 
@@ -95,16 +95,19 @@ const names = [
 function generateName() {
 
     const randomIndex =
-        Math.floor(
-            Math.random() * names.length
-        );
+        Math.floor(Math.random() * names.length);
 
-    document.getElementById(
-        "randomName"
-    ).innerText =
+    const selectedCard =
         names[randomIndex];
 
+    document.getElementById("randomName").innerText =
+        selectedCard;
+
 }
+
+document
+    .getElementById("generateButton")
+    .addEventListener("click", generateName);
 
 </script>
 
